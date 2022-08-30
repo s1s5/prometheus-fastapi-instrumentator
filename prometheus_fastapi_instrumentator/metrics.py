@@ -9,7 +9,7 @@ If your requirements are really specific or very extensive it makes sense to
 create your own instrumentation function instead of combining several functions
 from this module.
 """
-
+from functools import lru_cache
 from typing import Callable, Optional, Tuple
 
 from prometheus_client import Counter, Histogram, Summary
@@ -463,6 +463,7 @@ def requests(
     return instrumentation
 
 
+@lru_cache
 def default(
     metric_namespace: str = "",
     metric_subsystem: str = "",
